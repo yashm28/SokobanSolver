@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Init {
 
 	private Integer rows;
-	private Integer max;
+	private Integer max = 0;
 	private Coordinate player = new Coordinate();
 	private ArrayList<Integer> cols = new ArrayList<Integer>();
 	private ArrayList<String> input = new ArrayList<String>();
@@ -55,6 +55,19 @@ public class Init {
 		}
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((goal == null) ? 0 : goal.hashCode());
+		result = prime * result + ((player == null) ? 0 : player.hashCode());
+		return result;
+	}
+
+	public GameState getInitialState() {
+		return new GameState(input, player, wall, stone, goal);
+	}
+
 	public Integer getRows() {
 		return this.rows;
 	}
@@ -65,23 +78,6 @@ public class Init {
 
 	public ArrayList<Integer> getCols() {
 		return this.cols;
-	}
-
-	public Coordinate getPlayer() {
-		return this.player;
-
-	}
-
-	public ArrayList<Coordinate> getGoal() {
-		return this.goal;
-	}
-
-	public ArrayList<Coordinate> getWall() {
-		return this.wall;
-	}
-
-	public ArrayList<Coordinate> getStone() {
-		return this.stone;
 	}
 
 }
