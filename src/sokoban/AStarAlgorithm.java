@@ -26,7 +26,7 @@ public class AStarAlgorithm {
 		this.current = initialState;
 		queue.add(current);
 		while (!queue.isEmpty()) {
-			logger.log(Level.INFO, "" + queue.size());
+//			logger.log(Level.INFO, "" + queue.size());
 			current = queue.poll();
 			if (current.isSolved()) {
 				return getSolution(current, nodes, redundant, queue.size(), traversed.size());
@@ -34,14 +34,16 @@ public class AStarAlgorithm {
 			if (!current.deadlockTest(current)) {
 				traversed.add(current);
 				ArrayList<String> actions = current.valid(current);
-//				logger.log(Level.SEVERE, "" + actions);
+				logger.log(Level.SEVERE, "" + actions);
 				for (int i = 0; i < actions.size(); i++) {
 					GameState child = getChildState(current, actions.get(i));
 					if ((child != null)) {
 						nodes++;
-						if ((!traversed.contains(child)) && (!queue.contains(child)))
+						if ((!traversed.contains(child)) && (!queue.contains(child))){
 							queue.add(child);
+						}
 						else {
+							logger.log(Level.INFO, "trav:" + child.getMove());
 							redundant++;
 							for (GameState next : queue) {
 								if (next == child) {
@@ -70,7 +72,7 @@ public class AStarAlgorithm {
 				last = last.getParent();
 			}
 		}
-//		logger.log(Level.INFO, path + "\"" + dir +"\"");
+		logger.log(Level.INFO, path + "\"" + dir +"\"");
 		ArrayList<Coordinate> stones = state.getStone();
 		int row = state.getPlayer().x;
 		int col = state.getPlayer().y;

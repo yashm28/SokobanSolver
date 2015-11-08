@@ -55,11 +55,11 @@ public class GameState {
 	}
 
 	public Boolean isSolved() {
-//		String s = this.getPlayer().x + "," + this.getPlayer().y + " ";
-//		for (Coordinate co : this.getStone()) {
-//			s += co.x + "," + co.y + " ";
-//		}
-//		logger.log(Level.SEVERE, s);
+		String s = this.getPlayer().x + "," + this.getPlayer().y + " ";
+		for (Coordinate co : this.getStone()) {
+			s += co.x + "," + co.y + " ";
+		}
+		logger.log(Level.SEVERE, s);
 		for (Coordinate c : this.getGoal()) {
 			if (!this.getStone().contains(c)) {
 				return false;
