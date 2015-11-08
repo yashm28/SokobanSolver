@@ -12,7 +12,8 @@ public class Main {
 		GameState initialState = init.getInitialState();
 		printState(initialState.getinput());
 		AStarAlgorithm astar = new AStarAlgorithm();
-		astar.solve(initialState);
+		String answer = astar.solve(initialState);
+		System.out.println(answer);
 	}
 
 	public static void printState(ArrayList<String> game) {

@@ -65,7 +65,7 @@ public class Init {
 	}
 
 	public GameState getInitialState() {
-		return new GameState(input, player, wall, stone, goal);
+		return new GameState(input, player, wall, stone, goal, null, null);
 	}
 
 	public Integer getRows() {
