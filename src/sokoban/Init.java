@@ -69,15 +69,15 @@ public class Init {
 	}
 
 	public Integer getRows() {
-		return this.rows;
+		return rows;
 	}
 
 	public Integer getMax() {
-		return this.max;
+		return max;
 	}
 
 	public ArrayList<Integer> getCols() {
-		return this.cols;
+		return cols;
 	}
 
 }

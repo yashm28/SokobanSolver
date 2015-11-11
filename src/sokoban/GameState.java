@@ -1,12 +1,8 @@
 package sokoban;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GameState {
-
-	private Logger logger = Logger.getLogger("GameState");
 
 	private Integer cost;
 	private Integer HeuristicCost;
@@ -55,11 +51,6 @@ public class GameState {
 	}
 
 	public Boolean isSolved() {
-		String s = this.getPlayer().x + "," + this.getPlayer().y + " ";
-		for (Coordinate co : this.getStone()) {
-			s += co.x + "," + co.y + " ";
-		}
-		logger.log(Level.SEVERE, s);
 		for (Coordinate c : this.getGoal()) {
 			if (!this.getStone().contains(c)) {
 				return false;
@@ -73,35 +64,43 @@ public class GameState {
 			int row = co.x;
 			int col = co.y;
 			if (!setContains(goal, row, col)) {
-				if (setContains(wall, row - 1, col) && setContains(wall, row, col - 1))
+				if (setContains(wall, row - 1, col) && setContains(wall, row, col - 1)) {
 					return true; // top & left
-				if (setContains(wall, row - 1, col) && setContains(wall, row, col + 1))
+				}
+				if (setContains(wall, row - 1, col) && setContains(wall, row, col + 1)) {
 					return true; // top & right
-				if (setContains(wall, row + 1, col) && setContains(wall, row, col - 1))
+				}
+				if (setContains(wall, row + 1, col) && setContains(wall, row, col - 1)) {
 					return true; // bottom & left
-				if (setContains(wall, row + 1, col) && setContains(wall, row, col + 1))
+				}
+				if (setContains(wall, row + 1, col) && setContains(wall, row, col + 1)) {
 					return true; // bottom & right
+				}
 
 				if (setContains(wall, row - 1, col - 1) && setContains(wall, row - 1, col)
 						&& setContains(wall, row - 1, col + 1) && setContains(wall, row, col - 2)
 						&& setContains(wall, row, col + 2) && (!setContains(goal, row, col - 1))
-						&& !setContains(goal, row, col + 1))
+						&& !setContains(goal, row, col + 1)) {
 					return true; // top & sides
+				}
 				if (setContains(wall, row + 1, col - 1) && setContains(wall, row + 1, col)
 						&& setContains(wall, row + 1, col + 1) && setContains(wall, row, col - 2)
 						&& setContains(wall, row, col + 2) && (!setContains(goal, row, col - 1))
-						&& (!setContains(goal, row, col + 1)))
+						&& (!setContains(goal, row, col + 1))) {
 					return true; // bottom & sides
+				}
 				if (setContains(wall, row - 1, col - 1) && setContains(wall, row, col - 1)
 						&& setContains(wall, row + 1, col - 1) && setContains(wall, row - 2, col)
 						&& setContains(wall, row + 2, col) && (!setContains(goal, row - 1, col))
-						&& (!setContains(goal, row + 1, col)))
+						&& (!setContains(goal, row + 1, col))) {
 					return true; // left & vertical
+				}
 				if (setContains(wall, row - 1, col + 1) && setContains(wall, row, col + 1)
 						&& setContains(wall, row + 1, col + 1) && setContains(wall, row - 2, col)
 						&& setContains(wall, row + 2, col) && (!setContains(goal, row - 1, col))
-						&& (!setContains(goal, row + 1, col)))
+						&& (!setContains(goal, row + 1, col))) {
 					return true; // right & top/bottom
+				}
 			}
 		}
 
@@ -185,39 +184,39 @@ public class GameState {
 	}
 
 	public Integer getCost() {
-		return this.cost;
+		return cost;
 	}
-	
+
 	public Integer getHeuristic() {
-		return this.HeuristicCost;
+		return HeuristicCost;
 	}
 
 	public ArrayList<String> getinput() {
-		return this.input;
+		return input;
 	}
 
 	public Coordinate getPlayer() {
-		return this.player;
+		return player;
 	}
 
 	public ArrayList<Coordinate> getWall() {
-		return this.wall;
+		return wall;
 	}
 
 	public ArrayList<Coordinate> getStone() {
-		return this.stone;
+		return stone;
 	}
 
 	public ArrayList<Coordinate> getGoal() {
-		return this.goal;
+		return goal;
 	}
 
 	public String getMove() {
-		return this.move;
+		return move;
 	}
 
 	public GameState getParent() {
-		return this.parent;
+		return parent;
 	}
 
 }
