@@ -2,7 +2,7 @@ package sokoban;
 
 import java.util.Comparator;
 
-public class HeuristicComparator implements Comparator<GameState> {
+public class HeuristicComparatorAStar implements Comparator<GameState> {
 
 	@Override
 	public int compare(GameState state0, GameState state1) {

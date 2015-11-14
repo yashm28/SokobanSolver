@@ -2,24 +2,21 @@ package sokoban;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.PriorityQueue;
-import java.util.logging.Logger;
+import java.util.Stack;
 
-public class AStarAlgorithm extends SearchAlgorithm {
-
-	final Logger logger = Logger.getLogger("AStarAlgorithm");
+public class DFS extends SearchAlgorithm {
 
 	private GameState current;
 	private HashSet<GameState> traversed = new HashSet<GameState>();
 	private Integer redundant;
 	private Integer nodes;
-	private PriorityQueue<GameState> queue = new PriorityQueue<>(11, new HeuristicComparatorAStar());
+	private Stack<GameState> stack = new Stack<GameState>();
 	private long start;
 	private long end;
 
-	public AStarAlgorithm() {
-		this.redundant = 0;
-		this.nodes = 0;
+	public DFS() {
+		nodes = 0;
+		redundant = 0;
 	}
 
 	@Override
@@ -27,17 +24,17 @@ public class AStarAlgorithm extends SearchAlgorithm {
 		String solution = "Could not Solve Problem!";
 		start = System.currentTimeMillis();
 		this.current = initialState;
-		queue.add(current);
+		stack.push(current);
 		Integer x = 5000;
-		while (!queue.isEmpty()) {
+		while (!stack.isEmpty()) {
 			if (traversed.size() == x) {
 				System.out.println("nodes explored:" + x);
 				x += 5000;
 			}
-			current = queue.poll();
+			current = stack.pop();
 			if (current.isSolved()) {
 				end = System.currentTimeMillis();
-				return getSolution(current, nodes, redundant, queue.size(), traversed.size(), start, end);
+				return getSolution(current, nodes, redundant, stack.size(), traversed.size(), start, end);
 			}
 			if (!current.deadlockTest(current)) {
 				traversed.add(current);
@@ -46,11 +43,11 @@ public class AStarAlgorithm extends SearchAlgorithm {
 					GameState child = getChildState(current, actions.get(i));
 					if ((child != null)) {
 						nodes++;
-						if ((!traversed.contains(child)) && (!queue.contains(child))) {
-							queue.add(child);
+						if ((!traversed.contains(child)) && (!stack.contains(child))) {
+							stack.push(child);
 						} else {
 							redundant++;
-							for (GameState next : queue) {
+							for (GameState next : stack) {
 								if (next == child) {
 									if (child.getCost() < next.getCost()) {
 										next = child;
@@ -63,6 +60,7 @@ public class AStarAlgorithm extends SearchAlgorithm {
 			}
 		}
 		return solution;
+
 	}
 
 }

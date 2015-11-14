@@ -2,22 +2,20 @@ package sokoban;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.PriorityQueue;
-import java.util.logging.Logger;
+import java.util.LinkedList;
+import java.util.Queue;
 
-public class AStarAlgorithm extends SearchAlgorithm {
-
-	final Logger logger = Logger.getLogger("AStarAlgorithm");
+public class BFS extends SearchAlgorithm {
 
 	private GameState current;
 	private HashSet<GameState> traversed = new HashSet<GameState>();
 	private Integer redundant;
 	private Integer nodes;
-	private PriorityQueue<GameState> queue = new PriorityQueue<>(11, new HeuristicComparatorAStar());
+	private Queue<GameState> queue = new LinkedList<GameState>();
 	private long start;
 	private long end;
 
-	public AStarAlgorithm() {
+	public BFS() {
 		this.redundant = 0;
 		this.nodes = 0;
 	}
@@ -63,6 +61,7 @@ public class AStarAlgorithm extends SearchAlgorithm {
 			}
 		}
 		return solution;
+
 	}
 
 }

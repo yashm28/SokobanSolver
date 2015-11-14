@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.logging.Logger;
 
-public class AStarAlgorithm extends SearchAlgorithm {
+public class GreedyBestFirstSearchAlgorithm extends SearchAlgorithm {
 
 	final Logger logger = Logger.getLogger("AStarAlgorithm");
 
@@ -13,11 +13,11 @@ public class AStarAlgorithm extends SearchAlgorithm {
 	private HashSet<GameState> traversed = new HashSet<GameState>();
 	private Integer redundant;
 	private Integer nodes;
-	private PriorityQueue<GameState> queue = new PriorityQueue<>(11, new HeuristicComparatorAStar());
+	private PriorityQueue<GameState> queue = new PriorityQueue<>(11, new HeuristicComparatorGreedy());
 	private long start;
 	private long end;
 
-	public AStarAlgorithm() {
+	public GreedyBestFirstSearchAlgorithm() {
 		this.redundant = 0;
 		this.nodes = 0;
 	}
@@ -63,6 +63,7 @@ public class AStarAlgorithm extends SearchAlgorithm {
 			}
 		}
 		return solution;
+
 	}
 
 }
