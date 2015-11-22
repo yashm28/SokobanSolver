@@ -37,6 +37,7 @@ public class AStarAlgorithm extends SearchAlgorithm {
 			current = queue.poll();
 			if (current.isSolved()) {
 				end = System.currentTimeMillis();
+				path = getPath(current);
 				return getSolution(current, nodes, redundant, queue.size(), traversed.size(), start, end);
 			}
 			if (!current.deadlockTest(current)) {
